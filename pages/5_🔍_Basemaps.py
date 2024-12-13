@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
-import matplotlib.pyplot as plt
+import altair as alt
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
 st.set_page_config(layout="wide", page_title="\u56db\u5ddd\u7701\u5730\u9707\u5206\u5e03\u53ef\u89c6\u5316", page_icon=":earth_asia:")
@@ -69,7 +69,7 @@ filtered_data = filter_data_by_month(data, month_selected)
 midpoint = calculate_midpoint(filtered_data["Lat"], filtered_data["Lon"])
 
 # DISPLAY MAP
-st.write(f"### 四川省地震分布图: {month_selected} \u6708")
+st.write(f"### 四川省地震分布图: {month_selected} 月")
 map(filtered_data, midpoint[0], midpoint[1], 7)
 
 # ADDITIONAL MAPS FOR SPECIFIC CITIES
@@ -80,11 +80,10 @@ city_coords = {
 }
 
 for city, coords in city_coords.items():
-    st.write(f"### {city} 地震分布可视化")
-    map(data, coords[0], coords[1], 7)
-
-# MONTHLY EARTHQUAKE FREQUENCY CHART
-import altair as alt
+    st.write(f"### {city} 地震分布可视化 ({month_selected} 月)")
+    city_data = filter_data_by_month(data, month_selected)
+    city_midpoint = calculate_midpoint(city_data["Lat"], city_data["Lon"])
+    map(city_data, coords[0], coords[1], 7)
 
 # 统计每月地震发生次数
 monthly_counts = data['Month'].value_counts().sort_index()
@@ -107,3 +106,4 @@ monthly_chart = (
 
 # 在 Streamlit 中展示图表
 st.altair_chart(monthly_chart, use_container_width=True)
+
