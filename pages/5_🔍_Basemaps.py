@@ -8,6 +8,15 @@ import altair as alt
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
 st.set_page_config(layout="wide", page_title="\u56db\u5ddd\u7701\u5730\u9707\u5206\u5e03\u53ef\u89c6\u5316", page_icon=":earth_asia:")
+markdown = """
+A Streamlit map template
+<https://github.com/opengeos/streamlit-map-template>
+"""
+
+st.sidebar.title("About")
+st.sidebar.info(markdown)
+logo = "https://i.imgur.com/UbOXYAU.png"
+st.sidebar.image(logo)
 
 # LOAD DATA ONCE
 @st.cache_data
