@@ -4,15 +4,14 @@ import pandas as pd
 # 设置页面布局
 st.set_page_config(layout="wide")
 
-# 关于信息
+# Customize the sidebar
 markdown = """
-A Streamlit map template  
-<https://github.com/opengeos/streamlit-map-template>
+数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("About")
+st.sidebar.title("四川地震可视化系统")
 st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
+logo = "地震.png"
 st.sidebar.image(logo)
 
 st.title("四川地震数据可视化")
