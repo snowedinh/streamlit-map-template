@@ -35,9 +35,26 @@ st.markdown(
 
 st.header("app應用背景")
 
-markdown = """
-功能介紹：1
-"""
+import streamlit as st
+
+st.set_page_config(layout="wide")
+
+st.title("四川地震数据可视化功能介绍")
+
+# 功能说明的字典
+features = {
+    "地震数据搜索": "用户可以通过输入查询的城市名称来筛选地震记录，帮助用户快速筛选出符合条件的地震事件。",
+    "震源点的聚合显示": "通过将地图上标记震源点的位置，并根据地震的分布密度自动生成叢集标记。帮助用户更直观地了解震源点的空间分布。",
+    "热力图": "直观反映地震事件的密集区域，帮助用户快速识别地震高发地带。",
+    "3D与图表统计": "结合地理坐标和震级信息，以高度直观的三维效果，为用户提供深层次的视觉化效果。图表统计按月份为单位筛选地震事件，能够反映时间尺度上的地震分布情况。",
+    "动态缓冲区分析": "帮助用户直观了解地震震源影响范围，通过动态观察不同震源的交叉区域，识别高风险的重叠区域。",
+}
+
+# 循环生成气泡样式的可展开详情框
+for title, description in features.items():
+    with st.expander(f"**{title}**", expanded=False):
+        st.write(description)
+""
 
 st.markdown(markdown)
 
