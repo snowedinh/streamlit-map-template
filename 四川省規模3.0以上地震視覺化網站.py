@@ -5,10 +5,10 @@ st.set_page_config(layout="wide")
 
 # Customize the sidebar
 markdown = """
-数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
+數據來源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("四川地震可视化系统")
+st.sidebar.title("四川規模3.0以上地震視覺化網站")
 st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
