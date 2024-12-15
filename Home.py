@@ -1,20 +1,22 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
 
+# 设置页面配置，必须在最开始调用
 st.set_page_config(layout="wide")
 
-
-# Customize the sidebar
+# 自定义侧边栏
 markdown = """
 数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
 st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
-logo = "地震.png"
+
+# 使用正确的 logo 图片链接
+logo = "https://github.com/snowedinh/streamlit-map-template/raw/main/%E5%9C%B0%E9%9C%87.png"
 st.sidebar.image(logo)
 
-# Customize page title
+# 自定义页面标题
 st.title("四川省規模3.0以上地震視覺化網站")
 
 st.markdown(
@@ -32,22 +34,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-st.header("app應用背景")
-
-import streamlit as st
-
-st.set_page_config(layout="wide")
-
-st.title("四川地震数据視覺化功能介绍")
-
-import streamlit as st
-
-# 设置页面布局，必须是第一个 Streamlit 调用
-st.set_page_config(layout="wide")
-
-# 页面标题和功能介绍
-st.title("四川地震数据可视化功能介绍")
+st.header("app應用功能詳情")
 
 # 功能说明的字典
 features = {
@@ -62,9 +49,3 @@ features = {
 for title, description in features.items():
     with st.expander(f"**{title}**", expanded=False):
         st.write(description)
-
-st.markdown(markdown)
-
-m = leafmap.Map(minimap_control=True)
-m.add_basemap("OpenTopoMap")
-m.to_streamlit(height=500)
