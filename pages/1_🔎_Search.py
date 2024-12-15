@@ -9,12 +9,12 @@ markdown = """
 数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("四川地震可视化系统")
+st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
 
-st.title("四川地震数据可视化")
+st.title("四川地震數據視覺化")
 
 # 加载数据的函数
 @st.cache_data
