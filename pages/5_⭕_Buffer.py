@@ -56,7 +56,7 @@ st.title("四川省地震緩衝區分析")
 
 # 用户输入缓冲区半径
 buffer_radius_km = st.number_input(
-    "請輸入緩衝區的半徑（單位：公里）：",
+    "請輸入緩衝區的半徑（單位：度 ）（1度≈1111公里）：",
     min_value=0.1,  # 设置最小值为0.1公里
     value=0.5,  # 默认值为0.5公里
     step=0.1,  # 每次步进0.1公里
@@ -66,7 +66,7 @@ buffer_radius_km = st.number_input(
 earthquake_data = load_data()
 
 # 生成地图
-st.write(f"### 使用 {buffer_radius_km} 公里的緩衝區進行分析")
+st.write(f"### 使用 {buffer_radius_km} 度的緩衝區進行分析")
 m = visualize_earthquake_with_buffer(earthquake_data, buffer_radius_km)
 
 # 在Streamlit中显示地图
