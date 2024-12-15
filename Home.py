@@ -5,12 +5,13 @@ st.set_page_config(layout="wide")
 
 # Customize the sidebar
 markdown = """
-數據來源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
+A Streamlit map template
+<https://github.com/opengeos/streamlit-map-template>
 """
 
-st.sidebar.title("四川規模3.0以上地震視覺化網站")
+st.sidebar.title("About")
 st.sidebar.info(markdown)
-logo = "地震.png"
+logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
 # Customize page title
