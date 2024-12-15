@@ -15,7 +15,7 @@ logo = "地震.png"
 st.sidebar.image(logo)
 
 
-st.title("Marker Cluster")
+st.title("標記叢集地圖")
 
 with st.expander("See source code"):
     with st.echo():
