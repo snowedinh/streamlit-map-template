@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-pip install streamlit-echarts
 import os
 import numpy as np
 import pandas as pd
