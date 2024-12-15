@@ -39,6 +39,14 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
+st.title("四川地震数据視覺化功能介绍")
+
+import streamlit as st
+
+# 设置页面布局，必须是第一个 Streamlit 调用
+st.set_page_config(layout="wide")
+
+# 页面标题和功能介绍
 st.title("四川地震数据可视化功能介绍")
 
 # 功能说明的字典
@@ -54,7 +62,6 @@ features = {
 for title, description in features.items():
     with st.expander(f"**{title}**", expanded=False):
         st.write(description)
-""
 
 st.markdown(markdown)
 
