@@ -28,12 +28,12 @@ with st.expander("See source code"):
 
         # 加载CSV文件
         try:
-            cities = pd.read_csv(cities_url, encoding="gbk")  # 根据实际情况调整编码
+            cities = pd.read_csv(cities_url, encoding="gbk")  
             st.write("Cities data loaded successfully:")
-            st.write(cities.head())  # 调试用，显示数据前几行
+            st.write(cities.head()) 
         except UnicodeDecodeError as e:
             st.error(f"Error loading cities data: {e}")
-            cities = pd.DataFrame()  # 如果加载失败，初始化为空
+            cities = pd.DataFrame()  
 
         # 加载 GeoJSON 文件
         try:
@@ -41,13 +41,13 @@ with st.expander("See source code"):
         except Exception as e:
             st.error(f"Error loading GeoJSON data: {e}")
 
-        # 如果数据加载成功，添加点数据到地图
+        # 添加点数据到地图
         if not cities.empty and "Lon" in cities.columns and "Lat" in cities.columns:
             m.add_points_from_xy(
                 cities,
                 x="Lon",
                 y="Lat",
-                color_column=None,  # 替换为数据中的实际列名
+                color_column=None,  
                 icon_names=["gear", "map", "leaf", "globe"],
                 spin=True,
                 add_legend=True,
