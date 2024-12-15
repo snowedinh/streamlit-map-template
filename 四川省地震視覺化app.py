@@ -9,7 +9,7 @@ markdown = """
 数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("四川地震可视化系统")
+st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
