@@ -3,5 +3,3 @@ geopandas
 leafmap
 owslib
 streamlit
-st_echarts
-streamlit_echarts
