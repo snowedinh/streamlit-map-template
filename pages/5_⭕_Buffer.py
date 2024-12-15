@@ -8,7 +8,7 @@ markdown = """
 数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("四川地震可视化系统")
+st.sidebar.title("四川地震視覺化系统")
 st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
@@ -52,11 +52,11 @@ def visualize_earthquake_with_buffer(data, buffer_radius_km):
     return m
 
 # 主程序
-st.title("四川省地震高发区分析")
+st.title("四川省地震緩衝區分析")
 
 # 用户输入缓冲区半径
 buffer_radius_km = st.number_input(
-    "请输入缓冲区的半径（单位：公里）：",
+    "請輸入緩衝區的半徑（單位：公里）：",
     min_value=0.1,  # 设置最小值为0.1公里
     value=0.5,  # 默认值为0.5公里
     step=0.1,  # 每次步进0.1公里
@@ -66,7 +66,7 @@ buffer_radius_km = st.number_input(
 earthquake_data = load_data()
 
 # 生成地图
-st.write(f"### 使用 {buffer_radius_km} 公里的缓冲区进行分析")
+st.write(f"### 使用 {buffer_radius_km} 公里的緩衝區進行分析")
 m = visualize_earthquake_with_buffer(earthquake_data, buffer_radius_km)
 
 # 在Streamlit中显示地图
