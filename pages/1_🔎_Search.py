@@ -14,7 +14,7 @@ st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
 
-st.title("四川地震數據視覺化")
+st.title("地震數據的瀏覽與查詢")
 
 # 加载数据的函数
 @st.cache_data
@@ -35,7 +35,7 @@ file_path = "四川省三级以上地震信息_0.csv"  # 确保路径正确
 data = load_data(file_path)
 
 # 检查数据结构
-st.write("原始数据预览：")
+st.write("原始數據的瀏覽：")
 
 # 显示整个表格并启用滚动条
 st.dataframe(data, height=500)  # 设置height参数来控制表格的显示高度，超出部分会自动出现滚动条
@@ -45,10 +45,10 @@ city_names = sorted(data['Location'].unique())
 
 # 搜索功能
 st.title("搜索功能")
-search_city = st.text_input("输入城市名称进行搜索", "")
+search_city = st.text_input("請輸入縣市的名稱進行查詢", "")
 
 # 下拉选择城市
-selected_city = st.selectbox("选择四川市级城市", ["请选择城市"] + city_names)
+selected_city = st.selectbox("選擇四川的縣市", ["請選擇城市"] + city_names)
 
 if search_city:
     filtered_data = data[data["Location"].str.contains(search_city, na=False)]
