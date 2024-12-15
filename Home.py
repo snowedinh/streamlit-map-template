@@ -36,8 +36,7 @@ st.markdown(
 st.header("app應用背景")
 
 markdown = """
-
-
+功能介紹：1
 """
 
 st.markdown(markdown)
