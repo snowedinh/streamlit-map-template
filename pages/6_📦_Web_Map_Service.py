@@ -2,7 +2,7 @@ import pandas as pd
 import folium
 from shapely.geometry import Point
 import streamlit as st
-import st_folium
+from streamlit_folium import st_folium
 
 # 加载地震震源数据
 @st.cache_data
