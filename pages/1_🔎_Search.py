@@ -48,7 +48,7 @@ st.title("搜索功能")
 search_city = st.text_input("請輸入縣市的名稱進行查詢", "")
 
 # 下拉选择城市
-selected_city = st.selectbox("選擇四川的縣市", ["請選擇城市"] + city_names)
+selected_city = st.selectbox("選擇四川的縣市", city_names)
 
 if search_city:
     filtered_data = data[data["Location"].str.contains(search_city, na=False)]
