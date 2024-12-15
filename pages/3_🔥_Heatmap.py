@@ -16,7 +16,7 @@ logo = "地震.png"
 st.sidebar.image(logo)
 
 # 頁面標題
-st.title("Heatmap")
+st.title("熱力圖")
 
 # 展開顯示程式碼
 with st.expander("See source code"):
