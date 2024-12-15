@@ -14,7 +14,7 @@ markdown = """
 数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
 """
 
-st.sidebar.title("四川地震可视化系统")
+st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
 logo = "地震.png"
 st.sidebar.image(logo)
@@ -67,9 +67,9 @@ def calculate_midpoint(lat, lon):
 data = load_data()
 
 # LAYING OUT THE TOP SECTION OF THE APP
-st.title("四川省2020年地震分布可视化")
+st.title("四川省地震分布視覺化")
 month_selected = st.slider(
-    "滑动可选择地震发生的月份", 1, 12, 1, key="selected_month"
+    "滑動可選擇地震發生的月份", 1, 12, 1, key="selected_month"
 )
 
 # FILTER DATA BASED ON SELECTED MONTH
@@ -79,23 +79,22 @@ filtered_data = filter_data_by_month(data, month_selected)
 midpoint = calculate_midpoint(filtered_data["Lat"], filtered_data["Lon"])
 
 # DISPLAY MAP
-st.write(f"### 四川省地震分布图: {month_selected} 月")
+st.write(f"### 四川省地震分布圖: {month_selected} 月")
 map(filtered_data, midpoint[0], midpoint[1], 7)
 
 # ADDITIONAL MAPS FOR SPECIFIC CITIES
 city_coords = {
-    "宜宾市": (28.77, 104.62),
-    "自贡市": (29.35, 104.77),
-    "绵阳市": (31.46, 104.73),
+    "宜賓市": (28.77, 104.62),
+    "自貢市": (29.35, 104.77),
+    "綿陽市": (31.46, 104.73),
 }
 
 for city, coords in city_coords.items():
-    st.write(f"### {city} 地震分布可视化 ({month_selected} 月)")
+    st.write(f"### {city} 地震分布視覺化 ({month_selected} 月)")
     city_data = filter_data_by_month(data, month_selected)
     city_midpoint = calculate_midpoint(city_data["Lat"], city_data["Lon"])
     map(city_data, coords[0], coords[1], 7)
 
-# 统计每月地震发生次数
 monthly_counts = data['Month'].value_counts().sort_index()
 chart_data = pd.DataFrame({
     'Month': monthly_counts.index,
@@ -103,7 +102,7 @@ chart_data = pd.DataFrame({
 })
 
 # Select chart type (Altair or ECharts)
-chart_type = st.radio("选择统计图表类型", ["Altair", "ECharts"])
+chart_type = st.radio("選擇統計圖表類型", ["Altair", "ECharts"])
 
 if chart_type == "Altair":
     # 使用 Altair 绘制图表
@@ -112,10 +111,10 @@ if chart_type == "Altair":
         .mark_area(interpolate='step-after', opacity=0.2, color='red')
         .encode(
             x=alt.X('Month:O', title='月份', axis=alt.Axis(labelAngle=0)),
-            y=alt.Y('Counts:Q', title='地震次数'),
+            y=alt.Y('Counts:Q', title='地震次數'),
             tooltip=['Month', 'Counts']
         )
-        .properties(title='四川省月度地震分布图', width='container', height=300)
+        .properties(title='四川省月度地震分布圖', width='container', height=300)
     )
 
     # 在 Streamlit 中展示 Altair 图表
@@ -124,7 +123,7 @@ if chart_type == "Altair":
 elif chart_type == "ECharts":
     # 使用 ECharts 绘制图表
     echart_option = {
-        "title": {"text": "四川省月度地震分布图"},
+        "title": {"text": "四川省月度地震分布圖"},
         "tooltip": {
             "trigger": "axis",
             "axisPointer": {"type": "cross"}
@@ -136,10 +135,10 @@ elif chart_type == "ECharts":
         },
         "yAxis": {
             "type": "value",
-            "name": "地震次数"
+            "name": "地震次數"
         },
         "series": [{
-            "name": "地震次数",
+            "name": "地震次數",
             "type": "line",
             "data": chart_data['Counts'].tolist(),
             "smooth": True
