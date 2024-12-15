@@ -5,9 +5,10 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 import altair as alt
+from streamlit_echarts import st_echarts  # Import for ECharts integration
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
-st.set_page_config(layout="wide", page_title="\u56db\u5ddd\u7701\u5730\u9707\u5206\u5e03\u53ef\u89c6\u5316", page_icon=":earth_asia:")
+st.set_page_config(layout="wide", page_title="\u56db\u5ccc\u7701\u5730\u9707\u5206\u5e03\u53ef\u89c6\u5316", page_icon=":earth_asia:")
 markdown = """
 A Streamlit map template
 <https://github.com/opengeos/streamlit-map-template>
@@ -101,18 +102,49 @@ chart_data = pd.DataFrame({
     'Counts': monthly_counts.values
 })
 
-# 使用 Altair 绘制图表
-monthly_chart = (
-    alt.Chart(chart_data)
-    .mark_area(interpolate='step-after', opacity=0.2, color='red')
-    .encode(
-        x=alt.X('Month:O', title='月份', axis=alt.Axis(labelAngle=0)),
-        y=alt.Y('Counts:Q', title='地震次数'),
-        tooltip=['Month', 'Counts']
+# Select chart type (Altair or ECharts)
+chart_type = st.radio("选择统计图表类型", ["Altair", "ECharts"])
+
+if chart_type == "Altair":
+    # 使用 Altair 绘制图表
+    monthly_chart = (
+        alt.Chart(chart_data)
+        .mark_area(interpolate='step-after', opacity=0.2, color='red')
+        .encode(
+            x=alt.X('Month:O', title='月份', axis=alt.Axis(labelAngle=0)),
+            y=alt.Y('Counts:Q', title='地震次数'),
+            tooltip=['Month', 'Counts']
+        )
+        .properties(title='四川省月度地震分布图', width='container', height=300)
     )
-    .properties(title='四川省月度地震分布图（3级以上）', width='container', height=300)
-)
 
-# 在 Streamlit 中展示图表
-st.altair_chart(monthly_chart, use_container_width=True)
+    # 在 Streamlit 中展示 Altair 图表
+    st.altair_chart(monthly_chart, use_container_width=True)
 
+elif chart_type == "ECharts":
+    # 使用 ECharts 绘制图表
+    echart_option = {
+        "title": {"text": "四川省月度地震分布图"},
+        "tooltip": {
+            "trigger": "axis",
+            "axisPointer": {"type": "cross"}
+        },
+        "xAxis": {
+            "type": "category",
+            "data": chart_data['Month'].tolist(),
+            "name": "月份"
+        },
+        "yAxis": {
+            "type": "value",
+            "name": "地震次数"
+        },
+        "series": [{
+            "name": "地震次数",
+            "type": "line",
+            "data": chart_data['Counts'].tolist(),
+            "smooth": True
+        }]
+    }
+
+    # Display the ECharts chart
+    st_echarts(options=echart_option, height="400px")
