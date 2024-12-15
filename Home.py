@@ -12,7 +12,7 @@ markdown = """
 st.sidebar.title("四川地震可视化系统")
 st.sidebar.info(markdown)
 logo = "地震.png"
-st.sidebar.image(logo))
+st.sidebar.image(logo)
 
 # Customize page title
 st.title("四川省規模3.0以上地震視覺化網站")
