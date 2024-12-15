@@ -3,6 +3,15 @@ import folium
 from shapely.geometry import Point
 import streamlit as st
 from streamlit_folium import st_folium
+# Customize the sidebar
+markdown = """
+数据来源：https://www.scdata.net.cn/oportal/catalog/5a1b7c017a714f9bb97dfba6d5906fd7
+"""
+
+st.sidebar.title("四川地震可视化系统")
+st.sidebar.info(markdown)
+logo = "地震.png"
+st.sidebar.image(logo)
 
 # 加载地震震源数据
 @st.cache_data
