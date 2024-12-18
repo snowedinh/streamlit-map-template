@@ -4,6 +4,5 @@ leafmap
 owslib
 streamlit
 folium
-st_echarts
 streamlit_echarts
-st_folium
+streamlit_folium
