@@ -6,3 +6,4 @@ streamlit
 folium
 st_echarts
 streamlit_echarts
+st_folium
