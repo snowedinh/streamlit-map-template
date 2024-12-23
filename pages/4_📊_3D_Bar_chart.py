@@ -105,12 +105,6 @@ with col2:
         st.session_state.city_bearings["全省"] %= 360
 
 # ADDITIONAL MAPS FOR SPECIFIC CITIES
-city_coords = {
-    "宜賓市": (28.77, 104.62),
-    "自貢市": (29.35, 104.77),
-    "綿陽市": (31.46, 104.73),
-}
-
 for city, coords in city_coords.items():
     st.write(f"### {city} 地震分布視覺化 ({month_selected} 月)")
     city_data = filter_data_by_month(data, month_selected)
@@ -118,11 +112,11 @@ for city, coords in city_coords.items():
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(f"順時針旋轉30度"):
+        if st.button(f"順時針旋轉30度", key=f"{city}_cw"):
             st.session_state.city_bearings[city] += 30
             st.session_state.city_bearings[city] %= 360
     with col2:
-        if st.button(f"逆時針旋轉30度"):
+        if st.button(f"逆時針旋轉30度", key=f"{city}_ccw"):
             st.session_state.city_bearings[city] -= 30
             st.session_state.city_bearings[city] %= 360
 
