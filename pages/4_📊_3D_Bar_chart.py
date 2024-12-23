@@ -16,7 +16,7 @@ markdown = """
 
 st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
-logo = "地震.png"
+logo = "https://github.com/snowedinh/streamlit-map-template/edit/main/%E5%9C%B0%E9%9C%87.png"
 st.sidebar.image(logo)
 
 # LOAD DATA ONCE
@@ -28,7 +28,7 @@ def load_data():
     return data
 
 # FUNCTION FOR MAP VISUALIZATION
-def map(data, lat, lon, zoom):
+def map(data, lat, lon, zoom, bearing):
     st.pydeck_chart(
         pdk.Deck(
             map_style="mapbox://styles/mapbox/light-v9",
@@ -37,6 +37,7 @@ def map(data, lat, lon, zoom):
                 "longitude": lon,
                 "zoom": zoom,
                 "pitch": 50,
+                "bearing": bearing,
             },
             layers=[
                 pdk.Layer(
@@ -78,9 +79,30 @@ filtered_data = filter_data_by_month(data, month_selected)
 # CALCULATE MIDPOINT
 midpoint = calculate_midpoint(filtered_data["Lat"], filtered_data["Lon"])
 
-# DISPLAY MAP
+# MAP ROTATION STATES
+city_coords = {
+    "宜賓市": (28.77, 104.62),
+    "自貢市": (29.35, 104.77),
+    "綿陽市": (31.46, 104.73),
+}
+if "global_bearing" not in st.session_state:
+    st.session_state.global_bearing = 0
+if "city_bearings" not in st.session_state:
+    st.session_state.city_bearings = {city: 0 for city in ["全省"] + list(city_coords.keys())}
+
+# DISPLAY MAIN MAP
 st.write(f"### 四川省地震分布圖: {month_selected} 月")
-map(filtered_data, midpoint[0], midpoint[1], 7)
+map(filtered_data, midpoint[0], midpoint[1], 7, st.session_state.city_bearings["全省"])
+
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("順時針旋轉30度", key="global_cw"):
+        st.session_state.city_bearings["全省"] += 30
+        st.session_state.city_bearings["全省"] %= 360
+with col2:
+    if st.button("逆時針旋轉30度", key="global_ccw"):
+        st.session_state.city_bearings["全省"] -= 30
+        st.session_state.city_bearings["全省"] %= 360
 
 # ADDITIONAL MAPS FOR SPECIFIC CITIES
 city_coords = {
@@ -92,8 +114,17 @@ city_coords = {
 for city, coords in city_coords.items():
     st.write(f"### {city} 地震分布視覺化 ({month_selected} 月)")
     city_data = filter_data_by_month(data, month_selected)
-    city_midpoint = calculate_midpoint(city_data["Lat"], city_data["Lon"])
-    map(city_data, coords[0], coords[1], 7)
+    map(city_data, coords[0], coords[1], 7, st.session_state.city_bearings[city])
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(f"順時針旋轉30度"):
+            st.session_state.city_bearings[city] += 30
+            st.session_state.city_bearings[city] %= 360
+    with col2:
+        if st.button(f"逆時針旋轉30度"):
+            st.session_state.city_bearings[city] -= 30
+            st.session_state.city_bearings[city] %= 360
 
 monthly_counts = data['Month'].value_counts().sort_index()
 chart_data = pd.DataFrame({
