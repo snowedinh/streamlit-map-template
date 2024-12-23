@@ -66,7 +66,7 @@ buffer_radius_km = st.number_input(
 earthquake_data = load_data()
 
 # 生成地图
-st.write(f"### 使用 {buffer_radius_km} 度的緩衝區進行分析")
+st.write(f"### 以 {buffer_radius_km} 度為半徑進行緩衝區分析")
 m = visualize_earthquake_with_buffer(earthquake_data, buffer_radius_km)
 
 # 在Streamlit中显示地图
