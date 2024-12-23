@@ -19,7 +19,7 @@ try:
 except:
     st.sidebar.image("https://example.com/path/to/your/image.png")  # Fallback URL
 
-st.title("立体地形图")
+st.title("熱力圖")
 
 with st.expander("See source code"):
     with st.echo():
