@@ -16,7 +16,7 @@ markdown = """
 
 st.sidebar.title("四川地震視覺化系統")
 st.sidebar.info(markdown)
-logo = "https://github.com/snowedinh/streamlit-map-template/edit/main/%E5%9C%B0%E9%9C%87.png"
+logo = "地震.png"
 st.sidebar.image(logo)
 
 # LOAD DATA ONCE
