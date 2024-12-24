@@ -7,5 +7,4 @@ folium
 streamlit_echarts
 streamlit_folium
 chi2
-matplotlib
-plotly
+
