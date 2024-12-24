@@ -79,7 +79,7 @@ def calculate_sde(df, lon_col, lat_col):
     return mean_x, mean_y, theta, a, b, area, flattening
 
 # Calculate ellipse points
-def get_ellipse_points(center_x, center_y, a, b, theta, num_points=100):
+def get_ellipse_points(center_x, center_y, a, b, theta, num_points=68):
     points = []
     for i in range(num_points):
         angle = (2 * pi * i) / num_points
