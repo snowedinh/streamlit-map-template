@@ -8,3 +8,4 @@ streamlit_echarts
 streamlit_folium
 scipy
 numpy
+chi2
