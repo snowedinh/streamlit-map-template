@@ -67,9 +67,9 @@ def calculate_sde(df, lon_col, lat_col):
     theta = 0.5 * np.arctan2(2 * cov_xy, var_x - var_y)
     
     # Calculate semi-major and semi-minor axes
-    a = np.sqrt(2 * chi2.ppf(0.95, 2) * 
+    a = np.sqrt(2 * chi2.ppf(0.68, 2) * 
                 ((var_x + var_y) / 2 + np.sqrt(((var_x - var_y) / 2)**2 + cov_xy**2)))
-    b = np.sqrt(2 * chi2.ppf(0.95, 2) * 
+    b = np.sqrt(2 * chi2.ppf(0.68, 2) * 
                 ((var_x + var_y) / 2 - np.sqrt(((var_x - var_y) / 2)**2 + cov_xy**2)))
     
     # Calculate area and flattening ratio
@@ -79,7 +79,7 @@ def calculate_sde(df, lon_col, lat_col):
     return mean_x, mean_y, theta, a, b, area, flattening
 
 # Calculate ellipse points
-def get_ellipse_points(center_x, center_y, a, b, theta, num_points=68):
+def get_ellipse_points(center_x, center_y, a, b, theta, num_points=100):
     points = []
     for i in range(num_points):
         angle = (2 * pi * i) / num_points
@@ -155,7 +155,7 @@ stations.add_to(m)
 folium.LayerControl().add_to(m)
 
 # Convert to streamlit component
-st_data = st_folium(m, width=800, height=600)
+st_data = st_folium(m, width=700, height=500)
 
 # Create comparison charts using Altair
 st.subheader("關鍵性指標對比")
