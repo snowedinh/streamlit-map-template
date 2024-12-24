@@ -155,7 +155,7 @@ stations.add_to(m)
 folium.LayerControl().add_to(m)
 
 # Convert to streamlit component
-st_data = st_folium(m, width=700, height=600)
+st_data = st_folium(m, width=800, height=500)
 
 # Create comparison charts using Altair
 st.subheader("關鍵性指標對比")
