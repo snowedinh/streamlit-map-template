@@ -70,4 +70,4 @@ st.write(f"### 以 {buffer_radius_km} 度為半徑進行緩衝區分析")
 m = visualize_earthquake_with_buffer(earthquake_data, buffer_radius_km)
 
 # 在Streamlit中显示地图
-st_folium(m, width=725)
+st_folium(m, width=800)
